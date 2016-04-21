@@ -1,0 +1,12 @@
+<h2>New Lesson</h2>
+<form method="post" action="/new" id="new-lesson">
+  <input type="text" name="name" placeholder="Lesson Name">
+  <input type="hidden" name="date" value="04/20/2016">
+  <textarea name="notes" rows="10" cols="50" form="new-lesson" placeholder="Notes"></textarea> 
+  <textarea name="goal" rows="5" cols="50" form="new-lesson" placeholder="Goal"></textarea>
+  <br>
+  <input type="submit" name="create" value="Create">
+</form>
+<br>
+<a href="/teacher/student/lessons">Cancel</a><br>
+<a href="/logout">Log Out</a>
