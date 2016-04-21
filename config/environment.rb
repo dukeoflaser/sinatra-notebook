@@ -1,5 +1,6 @@
 require 'bundler'
 Bundler.require
-configure :devlopment do
+
+configure :development do
   set :database, "sqlite3:db/notebook.db"
 end
