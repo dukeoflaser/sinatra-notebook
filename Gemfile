@@ -5,6 +5,7 @@ gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'rake'
 gem 'bcrypt'
+gem 'require_all'
 
 group :development do
   gem 'pry'
