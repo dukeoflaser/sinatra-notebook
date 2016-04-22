@@ -1,7 +1,13 @@
 <h3>Sign up as:</h3>
+<h3><%= flash[:name] %></h3>
+<h3><%= flash[:user] %></h3>
+<h3><%= flash[:email] %></h3>
+<h3><%= flash[:pw_mismatch] %></h3>
+<h3><%= flash[:password] %></h3>
+
 <form method="post" action="/signup">
-  <input type="radio" name="role" value="teacher" />Teacher
-  <input type="radio" name="role" value="student" />Student
+  <input type="radio" name="user_type" value="teacher" />Teacher
+  <input type="radio" name="user_type" value="student" checked/>Student
   <br>
   <input type="text" name="name" placeholder="Name">
   <br>
