@@ -5,7 +5,6 @@
   <textarea name="notes" rows="10" cols="50" form="edit-lesson"><%= @lesson.notes %></textarea> 
   <textarea name="goal" rows="5" cols="50" form="edit-lesson"><%= @lesson.goal %></textarea>
   <br>
-  Completed: <input type="checkbox" name="complete" value="true" <%= "checked" if @lesson.complete == true %>>
   <input type="submit" name="update" value="Save">
 </form>
 <br>
