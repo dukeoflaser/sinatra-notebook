@@ -1,17 +1,17 @@
-<a href="/student/lessons">All Lessons</a>
+<a href="/student/<%= @user.id %>/lessons">All Lessons</a>
 <br>
-<h3>Pan Flute</h3>
-<p>Date: April 20 2016</p>
+<h3><%= @lesson.name %></h3>
+<p><%= @lesson.date %></p>
 <h4>Notes</h4>
 <div>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, dolor, nemo eligendi corrupti excepturi beatae velit cumque magni natus architecto expedita necessitatibus neque. Vero, mollitia omnis deleniti sapiente quidem optio.</p>
+  <p><%= @lesson.notes %></p>
 </div>
 <h4>Goal</h4>
 <div>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, dolor, nemo eligendi corrupti excepturi beatae velit cumque magni natus architecto expedita necessitatibus neque. Vero, mollitia omnis deleniti sapiente quidem optio.</p>
+  <p><%= @lesson.goal %></p>
 </div>
 <h4>Status:</h4>
 <div>
-  <h4>Complete</h4>
+  <h4><%= @lesson.status %></h4>
 </div>
 <a href="/logout">Log Out</a>

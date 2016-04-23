@@ -1,13 +1,29 @@
-<h1>Bilbo's Lessons</h1>
-<a href="/teacher/student/lesson/new">New Lesson</a>
+<h1><%= @student.name%>'s Lessons</h1>
+<a href="/teacher/<%= @user.id %>/home">Home</a>
+<%= flash[:deleted] %>
+<br>
+<a href="/teacher/<%= @user.id %>/student/<%= @student.id %>/lesson/new">New Lesson</a>
 <hr>
-<a href="/teacher/student/lesson">
-  <div>
-    <h4>Date: April 20th 2016</h4>
-    <h3>Blues in A</h3>
-    <h5>Status: Incomplete</h5>
-  </div>
-</a>
-<hr>
+<% if @student.lessons.empty? %>
+  <h3>No Lessons</h3>
+  <hr>
+<% else %> 
+  <% @student.lessons.reverse.each do |lesson| %>
+    <a href="/teacher/<%= @user.id %>/student/<%= @student.id %>/lesson/<%= lesson.id %>">
+      <div>
+        <h4><%= lesson.date %></h4>
+        <h3><%= lesson.name %></h3>
+        <h5>Status: <%= lesson.status %></h5>
+      </div>
+    </a>
+    <hr>
+  <% end %>
+<% end %>
+
+
+
+
+
+
 <br>
 <a href="/logout">Log Out</a>

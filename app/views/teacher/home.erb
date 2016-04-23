@@ -1,20 +1,55 @@
 <h2>Notebook</h2>
-<br>
-<h4>Add Student</h4>
-<form method="post" action="/student/add">
-  <select>
-    <option value="4">Student 4</option>
-  </select>
-</form>
-<h4>Select Student</h4>
-<form method="post" action="/student">
-  <select>
-    <option value="1">Student 1</option>
-    <option value="2">Student 2</option>
-    <option value="3">Student 3</option>
-  </select>
-  <br>
-  <input type="submit" name="select" value="Select">
-</form>
+<h5><%= @user.name %></h5>
+<%= flash[:removed] %>
+<hr>
+<h4>Take a lost student under your wing.</h4>
+<% if Student.has_no_teacher.empty? %>
+
+  <form>
+    <select>
+      <option disabled>No Lost Students</option>
+      <input type="submit" value="Nurture" disabled>
+    </select>
+  </form> 
+
+<% else %>
+
+  <form method="post" action="/teacher/<%= @user.id %>/select">
+    <select name="student_id">
+      <% Student.has_no_teacher.each do |student| %>
+        <option value="<%= student.id %>"><%= student.name %></option>
+      <% end %>
+    </select>
+    <input type="submit" value="Nurture">
+  </form>
+
+<% end %>
+<h4>Select a current student.</h4>
+<% if @user.students.empty? %>
+
+  <form>
+    <select>
+      <option disabled>No Students</option>  
+    </select>
+    <br>
+    <input type="submit" value="Select" disabled>
+    <input type="submit" value="Remove" disabled>
+  </form>
+  
+<% else %>
+
+  <form method="post" action="/teacher/<%= @user.id %>/select">
+    <select name="student_id">
+      <% @user.students.each do |student| %>
+        <option value="<%= student.id %>"><%= student.name %></option>
+      <% end %>
+    </select>
+    <br>
+    <input type="submit" name="select" value="Select">
+    <input type="submit" name="remove" value="Remove">
+  </form>
+  
+<% end %>
+<hr>
 <a href="/logout">Log Out</a>
-<a href="/teacher/edit">Edit Account</a>
+<a href="/teacher/<%= @user.id %>/edit">Edit Account</a>

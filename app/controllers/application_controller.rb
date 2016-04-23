@@ -1,5 +1,4 @@
  require './config/environment'
- require 'pry'
 
 class ApplicationController < Sinatra::Base
   
@@ -10,7 +9,7 @@ class ApplicationController < Sinatra::Base
     set :session_secret, 'notebook'
     register Sinatra::Flash
   end
-
+  
   get '/' do
     erb :index
   end
@@ -26,7 +25,7 @@ class ApplicationController < Sinatra::Base
       redirect '/signup'
     end
 
-    if user_unavailable?(params["user_type"], params["email"])
+    if user_exists?(params["user_type"], params["email"])
       flash[:user] = "That email address is already in use."
       redirect '/signup'
     end
@@ -51,15 +50,13 @@ class ApplicationController < Sinatra::Base
     user.password = params["password"]
     user.save
     
-    unless user.save
+    if user.save
+      session[:user_id] = user.id
+      redirect "teacher/#{user.id}/home" if user.is_a? Teacher
+      redirect "student/#{user.id}/lessons" if user.is_a? Student
+    else  
       flash[:password] = "Please enter a valid password."
       redirect '/signup'
-    end
-    
-    if params["user_type"] == "teacher"
-      redirect '/teacher/home'
-    else
-      redirect "student/lessons/#{user.id}"
     end
     
   end
@@ -69,7 +66,29 @@ class ApplicationController < Sinatra::Base
   end
   
   post '/login' do
-    
+    user_type = params["user_type"]
+    email = params["email"]
+
+    unless user_exists?(user_type, email)
+      flash[:user] = "No #{user_type} account with the email address of #{email} exists."
+      redirect '/login'
+    else
+      if user_type == "teacher"
+        user = Teacher.all.find_by(email: email)
+      else
+        user = Student.all.find_by(email: email)
+      end
+      
+      if user && user.authenticate(params["password"])
+        session[:user_id] = user.id
+        redirect "/teacher/#{user.id}/home" if user.is_a? Teacher
+        redirect "/student/#{user.id}/lessons" if user.is_a? Student
+      else
+        flash[:password] = "Incorrect Password"
+        redirect '/login'
+      end
+    end
+
   end
   
   get '/logout' do
@@ -79,7 +98,7 @@ class ApplicationController < Sinatra::Base
   
   helpers do
     
-    def user_unavailable?(user_type, submitted_email)
+    def user_exists?(user_type, submitted_email)
       if user_type == "teacher"
         user = Teacher.all.find_by email: submitted_email
         !!user

@@ -1,13 +1,20 @@
 <h1>Your Lessons</h1>
+<%= @user.name %>
 <hr>
-<a href="/student/lesson">
-  <div>
-    <h4>Date: April 20th 2016</h4>
-    <h3>Blues in A</h3>
-    <h5>Status: Incomplete</h5>
-  </div>
-</a>
+<% if @user.lessons.empty? %>
+  <h3>No Lessons</h3>
+<% else %>  
+  <% @user.lessons.reverse.each do |lesson| %>
+  <a href="/student/<%= @user.id %>/lesson/<%= lesson.id %>">
+    <div>
+      <h4><%= lesson.date %></h4>
+      <h3><%= lesson.name %></h3>
+      <h5>Status: <%= lesson.status %></h5>
+    </div>
+  </a>
+  <% end %>
+<% end %>  
 <hr>
 <br>
 <a href="/logout">Log Out</a>
-<a href="/student/edit">Edit Account</a>
+<a href="/student/<%= @user.id %>/edit">Edit Account</a>
