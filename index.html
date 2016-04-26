@@ -50,7 +50,7 @@ With that in mind, that is the format this blog post will take. Examining issues
 <h4>
 <a id="what-im-happy-with" class="anchor" href="#what-im-happy-with" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I'm happy with.</h4>
 
-<p>I had a good idea of which gems I would be relying on, how to get a development database setup, and my general file requirements and dependencies. In my mind, the chain of dependencies, starting with when the app is run, looks like this:</p>
+<p>I had a good idea of which gems I would be relying on, how to get a development database setup, and my general file requirements and dependencies. In my mind, the chain of dependencies, beginning when the app is run, looks like this:</p>
 
 <div class="highlight highlight-source-ruby"><pre>dependencies <span class="pl-k">=</span> {
   <span class="pl-c1">:shotgun</span> =&gt; <span class="pl-c1">:config</span>,
@@ -74,10 +74,33 @@ With that in mind, that is the format this blog post will take. Examining issues
 <p>I did find <a href="http://ashleygwilliams.github.io/ratpack/">this</a> boilerplate, however, which is similar to what I put together. I will probably give this a whirl next time around, although I think there is something to be said for crafting one's own set of tools if possible.</p>
 
 <h3>
-<a id="multiple-controllers---configuration" class="anchor" href="#multiple-controllers---configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Multiple Controllers - Configuration.</h3>
+<a id="modeling---sinatra-and-high-fashion" class="anchor" href="#modeling---sinatra-and-high-fashion" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Modeling - Sinatra and High Fashion</h3>
 
 <h4>
 <a id="what-im-happy-with-1" class="anchor" href="#what-im-happy-with-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I'm happy with.</h4>
+
+<p>The way in which the models were able to interact with each other through their associations went exactly as planned and I had little trouble, if any, accessing data from any of the tables in any given situation. This is the area though, that I feel is also the root of the apps biggest, current flaw.</p>
+
+<h4>
+<a id="what-i-could-do-better-1" class="anchor" href="#what-i-could-do-better-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I could do better.</h4>
+
+<p>The problem, as I see it, is that a teacher and a student can have the same user id. As they each have separate tables in the database, the first teacher to signup gets an <code>id</code> of 1 as does the first student. This causes no problems for the normal flow of the app, but what happens when the student logs in, and then manually types in ".../teacher/home" ?</p>
+
+<p>Well, unfortunately, this route simply depends upon the existence of that user id and is indiscriminate about the type of user.</p>
+
+<div class="highlight highlight-source-ruby"><pre>get <span class="pl-s"><span class="pl-pds">'</span>/teacher/home<span class="pl-pds">'</span></span> <span class="pl-k">do</span>
+  <span class="pl-k">unless</span> session[<span class="pl-c1">:user_id</span>].nil?
+    <span class="pl-smi">@user</span> <span class="pl-k">=</span> <span class="pl-c1">Teacher</span>.find_by_id(session[<span class="pl-c1">:user_id</span>])
+    <span class="pl-c">#...</span>
+<span class="pl-k">end</span></pre></div>
+
+<p>I think the solution to this will be simple enough, however. Upon login, a session variable containing the user type needs to be set, and then checked when any teacher or student specific page is accessed.</p>
+
+<h3>
+<a id="multiple-controllers---configuration" class="anchor" href="#multiple-controllers---configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Multiple Controllers - Configuration.</h3>
+
+<h4>
+<a id="what-im-happy-with-2" class="anchor" href="#what-im-happy-with-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I'm happy with.</h4>
 
 <p>I was tempted to dump all my routes into the main app controller, but after completing the project and looking at the files, I'm glad I didn't. In this case, having a modular structure seems like the best way to go.</p>
 
@@ -109,8 +132,40 @@ With that in mind, that is the format this blog post will take. Examining issues
 <h3>
 <a id="sessions-vs-dynamic-urls" class="anchor" href="#sessions-vs-dynamic-urls" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sessions vs Dynamic URLs</h3>
 
+<h4>
+<a id="what-im-happy-with-3" class="anchor" href="#what-im-happy-with-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I'm happy with.</h4>
+
+<p>I'm happy with the final outcome. For the most part.</p>
+
+<h4>
+<a id="what-i-could-have-done-better-1" class="anchor" href="#what-i-could-have-done-better-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I could have done better.</h4>
+
+<p>I could have saved myself some time and started with the proper url structure in the first place. Instead, I started off using dynamic urls, exclusively. Even for the teacher <code>id</code> when I was actually relying on a session to provide the id.
+For example, I had something like this:</p>
+
+<div class="highlight highlight-source-ruby"><pre>get <span class="pl-s"><span class="pl-pds">'</span>/teacher/:id/home<span class="pl-pds">'</span></span> <span class="pl-k">do</span>
+  <span class="pl-smi">@user</span> <span class="pl-k">=</span> <span class="pl-c1">Teacher</span>.find_by_id(session[<span class="pl-c1">:user_id</span>])
+  <span class="pl-c">#...</span>
+<span class="pl-k">end</span>  </pre></div>
+
+<p>The amount of sense that makes is, to put it mildly, not a lot. I'm ashamed to admit how many routes I had going before I realized the pointlessness of that <code>:id</code> parameter. Let's just say, the sheer number of <code>&lt;%= @user.id %&gt;</code>s in my view's hyperlinks was beginning to give me claustrophobia.</p>
+
+<p>Once I got rid of those unneeded parameters, my routes and my view templates cleaned up nicely.</p>
+
+<p>Once big problem that remains with the URLs is this: What happen's </p>
+
 <h3>
 <a id="multiple-layouts-and-templates" class="anchor" href="#multiple-layouts-and-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Multiple Layouts and Templates</h3>
+
+<h4>
+<a id="what-im-happy-with-4" class="anchor" href="#what-im-happy-with-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I'm happy with.</h4>
+
+<p>I did manage to re-use several templates here and there, and I did implement a basic layout template to reduce the amount of repeat markup.</p>
+
+<h4>
+<a id="what-i-could-have-done-better-2" class="anchor" href="#what-i-could-have-done-better-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I could have done better.</h4>
+
+<p>I think there is a lot of room for improvement here. For example, the top and bottom navigation bars should probably have gotten their own template, and the container divs that centre the bulk of</p>
 
 <h3>
 <a id="the-frustration-of-css" class="anchor" href="#the-frustration-of-css" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Frustration of CSS.</h3>
