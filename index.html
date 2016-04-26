@@ -1,44 +1,82 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Sinatra-notebook by dukeoflaser</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-dark.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
     <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
+    <title>sinatra-notebook by dukeoflaser</title>
   </head>
+
   <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/dukeoflaser/sinatra-notebook">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/dukeoflaser/sinatra-notebook/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/dukeoflaser/sinatra-notebook/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
+    <div id="container">
+      <div class="inner">
 
-    <div class="wrapper">
+        <header>
+          <h1>sinatra-notebook</h1>
+          <h2>A small app for sharing lessons with music students.</h2>
+        </header>
 
-      <section>
-        <div id="title">
-          <h1>Sinatra-notebook</h1>
-          <p>A small app for sharing lessons with music students.</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/dukeoflaser">dukeoflaser</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
-        </div>
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/dukeoflaser/sinatra-notebook/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/dukeoflaser/sinatra-notebook/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/dukeoflaser/sinatra-notebook" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
 
-        <h3>
+        <hr>
+
+        <section id="main_content">
+          <h3>
+<a id="experimentation" class="anchor" href="#experimentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Experimentation</h3>
+
+<p>I collect ducks. Usually without knowing it. I often wrestle with those ducks, trying to put them in rows. Once I get a row, I am then allowed to start. What I mean by that is this: I feel as though I need to know the most efficient methods, the most effective approaches to a task, or goal, before I start. In essence, I want to know the outcome of my actions, even before acting. That mindset, as obviously futile as it is, can often be paralyzing. It has put a stop to many of my ideas before those ideas ever started. Case in point, this blog. I have always felt as though I need to be the world's foremost expert (or close to it) on a subject in order to write about it. </p>
+
+<p>As an avid reader and listener of <a href="fourhourworkweek.com/blog/">Tim Ferriss</a>, it has slowly dawned upon me that <em>experimentation</em> is a much more rewarding and feasible approach to acting on an idea. I feel as though experimentation ...agile development, the concept of learning from your own actions, tracking data, is a more effective mindset for learning, for acting on ideas, and growing as a person. With that in mind, that is the format this blog post will take. Examining issues, things that I did not/do not know, my solutions, even if they are not the best or 'right', documenting them, examinging what I did right, what I can do better next time. Use this blog post as a measuring stick.</p>
+
+<h3>
+<a id="issue-1-where-to-start-boilerplate-and-workflow" class="anchor" href="#issue-1-where-to-start-boilerplate-and-workflow" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Issue #1 Where to start? Boilerplate and Workflow.</h3>
+
+<h2>
+<a id="what-i-did-right" class="anchor" href="#what-i-did-right" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I did right.</h2>
+
+<p>I had a good idea of which gems I would be relying on,</p>
+
+<h2>
+<a id="what-i-could-do-better" class="anchor" href="#what-i-could-do-better" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I could do better.</h2>
+
+<p>Once I got my core files and directories set up, I should have uploaded them to an additional remote repository as a staring point for any future Sinatra projects. </p>
+
+<p>I did find this <a href="http://ashleygwilliams.github.io/ratpack/">boilerplate</a>, however, which is similar to what I put together. I will probably give this a whirl next time around, although I think there is something to be said for crafting one's own set of tools when possible.</p>
+
+<h3>
+<a id="issue-2-multiple-controllers---configuration" class="anchor" href="#issue-2-multiple-controllers---configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Issue #2 Multiple Controllers - configuration.</h3>
+
+<p>I had an issue with '<a href="http://stackoverflow.com/questions/735073/best-way-to-require-all-files-from-a-directory-in-ruby">properly</a>' requiring relative files. I could get the 'improper' method working, </p>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-c1">Dir</span>[<span class="pl-s"><span class="pl-pds">"</span>/path/to/directory/*.rb<span class="pl-pds">"</span></span>].each {|<span class="pl-smi">file</span>| <span class="pl-k">require</span> file }</pre></div>
+
+<p>but ended up with an empty array when using the proper technique. </p>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-c1">Dir</span>[<span class="pl-c1">File</span>.dirname(<span class="pl-v">__FILE__</span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>/lib/*.rb<span class="pl-pds">'</span></span>].each {|<span class="pl-smi">file</span>| <span class="pl-k">require</span> file }</pre></div>
+
+<p>I never did come to an understanding as to why I couldn't get it to work. 
+I ended up using the <code>require_all</code> gem instead.</p>
+
+<h3>
+<a id="issue-3-the-use-of-sessions-vs-a-dynamic-url" class="anchor" href="#issue-3-the-use-of-sessions-vs-a-dynamic-url" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Issue #3 The use of sessions vs a dynamic URL</h3>
+
+<h3>
+<a id="issue-4-using-multiple-layouts-and-templates" class="anchor" href="#issue-4-using-multiple-layouts-and-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Issue #4 Using multiple layouts and templates</h3>
+
+<h3>
+<a id="issue-5-the-frustration-of-css" class="anchor" href="#issue-5-the-frustration-of-css" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Issue #5 The frustration of CSS.</h3>
+
+<h3>
 <a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
 
 <div class="highlight highlight-source-ruby"><pre><span class="pl-k">def</span> <span class="pl-en">say_hello</span>(<span class="pl-smi">name</span>)
@@ -66,10 +104,15 @@
 <a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support or Contact</h3>
 
 <p>Having trouble with Pages? Check out our <a href="https://help.github.com/pages">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.</p>
-      </section>
+        </section>
 
+        <footer>
+          sinatra-notebook is maintained by <a href="https://github.com/dukeoflaser">dukeoflaser</a><br>
+          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
   </body>
 </html>
