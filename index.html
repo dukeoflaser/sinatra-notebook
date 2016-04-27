@@ -31,18 +31,35 @@
         <hr>
 
         <section id="main_content">
-          <h3>
+          <p>As an individual who often wrestles with ducks, proceeding with any given task or idea (case in point, this blog post) can seem futile if those ducks aren't in their rows. </p>
+
+<p>There are a couple lines of thought that I've picked up from <a href="fourhourworkweek.com/blog/">Tim Ferriss</a> and <a href="http://blog.dilbert.com/">Scott Adams</a> that have helped me overcome that tendency. I'd like to apply to these approaches to this blog post and see how it turns out.</p>
+
+<h3>
 <a id="on-experimentation" class="anchor" href="#on-experimentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>On Experimentation</h3>
 
-<p>I collect ducks. Usually without knowing it. I often wrestle with those ducks, trying to put them in rows. Once I get a row, I am then allowed to start. What I mean by that is this: I feel as though I need to know the most efficient methods, the most effective approaches to a task, or goal, before I start. In essence, I want to know the outcome of my actions, even before acting. That mindset, as obviously futile as it is, can often be paralyzing. It has put a stop to many of my ideas before those ideas ever started. Case in point, this blog. I have always felt as though I need to be the world's foremost expert (or close to it) on a subject in order to write about it. </p>
-
-<p>As an avid reader and listener of <a href="fourhourworkweek.com/blog/">Tim Ferriss</a>, it has slowly dawned upon me that <em>experimentation</em> is a much more rewarding and feasible approach to acting on an idea. I feel as though experimentation ...agile development, the concept of learning from your own actions, tracking data, is a more effective mindset for learning, for acting on ideas, and growing as a person. </p>
+<p>It has slowly dawned upon me that <em>experimentation</em> is a much more rewarding and feasible approach to acting on an idea than <strong>pre-action duck-alignment</strong> is. In fact, I believe <em>agile development</em>, the concept of learning/navigating through rapid product testing and feedback loops is in effect, experimentation. Experimentation is a far more effective mindset for learning, for acting on ideas, and growing as a person than is perfectionist induced non-action. </p>
 
 <h3>
 <a id="on-evaluation" class="anchor" href="#on-evaluation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>On Evaluation</h3>
 
-<p>...Track Data
-With that in mind, that is the format this blog post will take. Examining issues, things that I did not/do not know, my solutions, even if they are not the best or 'right', documenting them, examining what I did right, what I can do better next time. Use this blog post as a measuring stick.</p>
+<p>Track some kind of metric. Some metrics are more meaningful than others, and there is the possibility that choosing the wrong metric causes damage. But in this case, I believe any metric is better than nothing. A metric allows comparison and reveals progress or lack thereof.</p>
+
+<h3>
+<a id="on-goals" class="anchor" href="#on-goals" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>On Goals</h3>
+
+<p>Goals are great, but many times you just don't know what the best goal really is. Rather than being totally goal oriented - focused on a single outcome, system orientation helps locate that goal in times of uncertainty. </p>
+
+<h3>
+<a id="how-do-these-apply-to-this-blog-post" class="anchor" href="#how-do-these-apply-to-this-blog-post" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How do these apply to this blog post?</h3>
+
+<ul>
+<li><p>I'm treating this blog post as the documentation of an experiment. Rather than trying to come off as a being any kind of authority on the use of Sinatra or it's sidekicks, I am simply taking a look at what I learned from the process.</p></li>
+<li><p>Tracking the number and type of things that cause me problems will allow me to see my own growth as a developer.</p></li>
+<li><p>I do not yet know the outcome of this project or of this post. But I do know that simple documentation of successes and failures will be beneficial to my growth, and that is good enough for me.</p></li>
+</ul>
+
+<hr>
 
 <h3>
 <a id="where-to-start-boilerplate-and-workflow" class="anchor" href="#where-to-start-boilerplate-and-workflow" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Where to start? Boilerplate and Workflow.</h3>
@@ -50,7 +67,7 @@ With that in mind, that is the format this blog post will take. Examining issues
 <h4>
 <a id="what-im-happy-with" class="anchor" href="#what-im-happy-with" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I'm happy with.</h4>
 
-<p>I had a good idea of which gems I would be relying on, how to get a development database setup, and my general file requirements and dependencies. In my mind, the chain of dependencies, beginning when the app is run, looks like this:</p>
+<p>I started with a good idea of which gems I would be relying on, how to get a development database setup, and my general file requirements and dependencies. In my mind, the chain of dependencies, beginning when the app is run, looks like this:</p>
 
 <div class="highlight highlight-source-ruby"><pre>dependencies <span class="pl-k">=</span> {
   <span class="pl-c1">:shotgun</span> =&gt; <span class="pl-c1">:config</span>,
@@ -60,14 +77,14 @@ With that in mind, that is the format this blog post will take. Examining issues
   <span class="pl-c1">:gems</span> =&gt; <span class="pl-c1">:bundler</span>
 }</pre></div>
 
-<p>With that it mind, I didn't have too much trouble getting Sinatra to fire.</p>
+<p>Following that 'chain of command', I didn't have too much trouble getting Sinatra up and running.</p>
 
 <p>As far as work flow is concerned, my tendency to get some ducks in a row paid off. Simply taking the time to create a rough mockup/flowchart gave me a good idea of what models, relationships, and views I was going to need.</p>
 
 <p>Starting off by creating the models and their associations seemed like a no-brainer, but effectively creating controllers and views seemed to require more mixing and matching. In the end, I sketched in the routes for each controller, and then introduced functionality to the views on an 'as-needed' basis. </p>
 
 <h4>
-<a id="what-i-could-do-better" class="anchor" href="#what-i-could-do-better" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I could do better.</h4>
+<a id="what-i-could-have-done-better" class="anchor" href="#what-i-could-have-done-better" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I could have done better.</h4>
 
 <p>Once I got my core files and directories set up, I should have saved them to an additional repository as a staring point for any future Sinatra projects. </p>
 
@@ -79,14 +96,16 @@ With that in mind, that is the format this blog post will take. Examining issues
 <h4>
 <a id="what-im-happy-with-1" class="anchor" href="#what-im-happy-with-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I'm happy with.</h4>
 
-<p>The way in which the models were able to interact with each other through their associations went exactly as planned and I had little trouble, if any, accessing data from any of the tables in any given situation. This is the area though, that I feel is also the root of the apps biggest, current flaw.</p>
+<p>The way in which the models were able to interact with each other through their associations went exactly as planned and I had little trouble, if any, accessing data from any of the tables in any given situation. Part of that is due to [this experiment] I did with ActiveRecord's associations.</p>
+
+<p>Currently, however, the models are also an area that I feel are the root of the apps biggest flaw.</p>
 
 <h4>
-<a id="what-i-could-do-better-1" class="anchor" href="#what-i-could-do-better-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I could do better.</h4>
+<a id="what-i-could-have-done-better-1" class="anchor" href="#what-i-could-have-done-better-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I could have done better.</h4>
 
-<p>The problem, as I see it, is that a teacher and a student can have the same user id. As they each have separate tables in the database, the first teacher to signup gets an <code>id</code> of 1 as does the first student. This causes no problems for the normal flow of the app, but what happens when the student logs in, and then manually types in ".../teacher/home" ?</p>
+<p>The problem is that a teacher and a student can have the same user id. As they each have separate tables in the database, the first teacher to signup gets an <code>id</code> of 1 as does the first student. This causes no problems for the normal flow of the app, but what happens when the student logs in and manually types in <code>.../teacher/home</code> to the URL bar?</p>
 
-<p>Well, unfortunately, this route simply depends upon the existence of that user id and is indiscriminate about the type of user.</p>
+<p>Well, unfortunately, teacher and student specific routes depend upon the existence of a user id but are indiscriminate about the type of user.</p>
 
 <div class="highlight highlight-source-ruby"><pre>get <span class="pl-s"><span class="pl-pds">'</span>/teacher/home<span class="pl-pds">'</span></span> <span class="pl-k">do</span>
   <span class="pl-k">unless</span> session[<span class="pl-c1">:user_id</span>].nil?
@@ -94,7 +113,45 @@ With that in mind, that is the format this blog post will take. Examining issues
     <span class="pl-c">#...</span>
 <span class="pl-k">end</span></pre></div>
 
-<p>I think the solution to this will be simple enough, however. Upon login, a session variable containing the user type needs to be set, and then checked when any teacher or student specific page is accessed.</p>
+<p>I think the solution to this will be simple enough, however. Upon login, a session variable containing the <code>user_type</code> needs to be set, and then checked when any teacher or student specific page is accessed.</p>
+
+<hr>
+
+<p><strong>Edit:</strong> I felt as though this issue did not allow the app fall under the 'Good Enough' category so I implemented the above solution and it does seem to solve the problem.</p>
+
+<hr>
+
+<p>A session variable is set upon login.</p>
+
+<div class="highlight highlight-source-ruby"><pre>  <span class="pl-k">if</span> user.is_a? <span class="pl-c1">Teacher</span>
+    session[<span class="pl-c1">:user_type</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>teacher<span class="pl-pds">'</span></span>
+    redirect <span class="pl-s"><span class="pl-pds">"</span>/teacher/home<span class="pl-pds">"</span></span>
+  <span class="pl-k">elsif</span> user.is_a? <span class="pl-c1">Student</span>
+    session[<span class="pl-c1">:user_type</span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>student<span class="pl-pds">'</span></span>
+    redirect <span class="pl-s"><span class="pl-pds">"</span>/student/lessons<span class="pl-pds">"</span></span>
+  <span class="pl-k">end</span></pre></div>
+
+<p><code>valid_teacher</code> and <code>valid_student</code> helper methods are created in corresponding controllers.</p>
+
+<div class="highlight highlight-source-ruby"><pre>  <span class="pl-k">def</span> <span class="pl-en">valid_teacher</span>
+    session[<span class="pl-c1">:user_id</span>].nil? <span class="pl-k">||</span> session[<span class="pl-c1">:user_type</span>] <span class="pl-k">!=</span> <span class="pl-s"><span class="pl-pds">'</span>teacher<span class="pl-pds">'</span></span> <span class="pl-k">?</span> <span class="pl-c1">false</span> : <span class="pl-c1">true</span>
+  <span class="pl-k">end</span></pre></div>
+
+<div class="highlight highlight-source-ruby"><pre>  <span class="pl-k">def</span> <span class="pl-en">valid_student</span>
+    session[<span class="pl-c1">:user_id</span>].nil? <span class="pl-k">||</span> session[<span class="pl-c1">:user_type</span>] <span class="pl-k">!=</span> <span class="pl-s"><span class="pl-pds">'</span>student<span class="pl-pds">'</span></span> <span class="pl-k">?</span> <span class="pl-c1">false</span> : <span class="pl-c1">true</span>
+  <span class="pl-k">end</span></pre></div>
+
+<p>Each teacher/student specific route now uses some control flow to either go ahead with the route logic or redirect back to the login page, depending on the outcome of the validation method.</p>
+
+<div class="highlight highlight-source-ruby"><pre>  get <span class="pl-s"><span class="pl-pds">'</span>/teacher/home<span class="pl-pds">'</span></span> <span class="pl-k">do</span>
+    <span class="pl-k">if</span> valid_teacher
+      <span class="pl-smi">@user</span> <span class="pl-k">=</span> <span class="pl-c1">Teacher</span>.find_by_id(session[<span class="pl-c1">:user_id</span>])
+      session[<span class="pl-c1">:student_id</span>] <span class="pl-k">=</span> <span class="pl-c1">nil</span>
+      erb <span class="pl-c1">:'/teacher/home'</span>
+    <span class="pl-k">else</span>
+      redirect <span class="pl-s"><span class="pl-pds">'</span>/login<span class="pl-pds">'</span></span>
+    <span class="pl-k">end</span>
+  <span class="pl-k">end</span></pre></div>
 
 <h3>
 <a id="multiple-controllers---configuration" class="anchor" href="#multiple-controllers---configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Multiple Controllers - Configuration.</h3>
@@ -105,7 +162,7 @@ With that in mind, that is the format this blog post will take. Examining issues
 <p>I was tempted to dump all my routes into the main app controller, but after completing the project and looking at the files, I'm glad I didn't. In this case, having a modular structure seems like the best way to go.</p>
 
 <h4>
-<a id="what-i-could-have-done-better" class="anchor" href="#what-i-could-have-done-better" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I could have done better.</h4>
+<a id="what-i-could-have-done-better-2" class="anchor" href="#what-i-could-have-done-better-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I could have done better.</h4>
 
 <p>When setting the configuration block for the main App Controller, I initially assumed that those configurations would be global, and apply to my other controllers. </p>
 
@@ -117,7 +174,7 @@ With that in mind, that is the format this blog post will take. Examining issues
     register <span class="pl-c1">Sinatra</span>::<span class="pl-c1">Flash</span>
   <span class="pl-k">end</span></pre></div>
 
-<p>When I realized that was not the case, I experimented with my <code>config.ru</code> file to no avail. I settled on simply including the configuration block in each and every controller. That, however, seems like a bit of a code smell and I have a sneaking suspicion there is a cleaner way of achieving the same results in a less redundant way. What that way is though, I don't yet know.</p>
+<p>When I realized that was not the case, I experimented with the <code>config.ru</code> file to no avail. I settled on simply including the configuration block in each and every controller. That, however, seems like a bit of a code smell and I have a sneaking suspicion there is a cleaner way of achieving the same results in a less redundant manner. What that manner is though, I don't yet know.</p>
 
 <p>I also had an issue with '<a href="http://stackoverflow.com/questions/735073/best-way-to-require-all-files-from-a-directory-in-ruby">properly</a>' requiring relative files. I could get the 'improper' method working, </p>
 
@@ -127,7 +184,7 @@ With that in mind, that is the format this blog post will take. Examining issues
 
 <div class="highlight highlight-source-ruby"><pre><span class="pl-c1">Dir</span>[<span class="pl-c1">File</span>.dirname(<span class="pl-v">__FILE__</span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>./app/controllers/*.rb<span class="pl-pds">'</span></span>].each {|<span class="pl-smi">file</span>| <span class="pl-k">require</span> file }</pre></div>
 
-<p>Digging in to both with <code>pry</code> indicated both were returning the same array of files so it remains a mystery to me as to why the second one failed. At the end of the day I used the <code>require_all</code> gem. That tidy's things up nicely, but is likely heavy handed for requiring a minimal number of files.</p>
+<p>Digging in to both statements with <code>pry</code> indicated both were returning the same array of files so it remains a mystery to me as to why the second one failed. At the end of the day I used the <code>require_all</code> gem. That tidy's things up nicely, but is likely heavy handed for requiring a minimal number of files.</p>
 
 <h3>
 <a id="sessions-vs-dynamic-urls" class="anchor" href="#sessions-vs-dynamic-urls" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sessions vs Dynamic URLs</h3>
@@ -138,7 +195,7 @@ With that in mind, that is the format this blog post will take. Examining issues
 <p>I'm happy with the final outcome. For the most part.</p>
 
 <h4>
-<a id="what-i-could-have-done-better-1" class="anchor" href="#what-i-could-have-done-better-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I could have done better.</h4>
+<a id="what-i-could-have-done-better-3" class="anchor" href="#what-i-could-have-done-better-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I could have done better.</h4>
 
 <p>I could have saved myself some time and started with the proper url structure in the first place. Instead, I started off using dynamic urls, exclusively. Even for the teacher <code>id</code> when I was actually relying on a session to provide the id.
 For example, I had something like this:</p>
@@ -148,27 +205,40 @@ For example, I had something like this:</p>
   <span class="pl-c">#...</span>
 <span class="pl-k">end</span>  </pre></div>
 
-<p>The amount of sense that makes is, to put it mildly, not a lot. I'm ashamed to admit how many routes I had going before I realized the pointlessness of that <code>:id</code> parameter. Let's just say, the sheer number of <code>&lt;%= @user.id %&gt;</code>s in my view's hyperlinks was beginning to give me claustrophobia.</p>
+<p>The amount of sense that makes is, to put it mildly, not a lot. At no point was I ever making use of <code>params[:id]</code>. I'm ashamed to admit how many routes I had going before I realized the pointlessness of that <code>:id</code> parameter. Let's just say, the sheer number of <code>&lt;%= @user.id %&gt;</code>s in my view's hyperlinks was beginning to give me claustrophobia.</p>
 
-<p>Once I got rid of those unneeded parameters, my routes and my view templates cleaned up nicely.</p>
-
-<p>Once big problem that remains with the URLs is this: What happen's </p>
+<p>Once I got rid of those unneeded parameters, particularly for both teachers and students, my routes and my view templates had some room to breath.</p>
 
 <h3>
-<a id="multiple-layouts-and-templates" class="anchor" href="#multiple-layouts-and-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Multiple Layouts and Templates</h3>
+<a id="keeping-it-dry" class="anchor" href="#keeping-it-dry" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Keeping it DRY</h3>
 
 <h4>
 <a id="what-im-happy-with-4" class="anchor" href="#what-im-happy-with-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I'm happy with.</h4>
 
-<p>I did manage to re-use several templates here and there, and I did implement a basic layout template to reduce the amount of repeat markup.</p>
+<p>I did manage to re-use several templates here and there, and I implemented a basic layout template to reduce the amount of repeat markup. Additionally, I was able to implement a number of helper methods that were used by multiple forms such as email validation and password confirmation.</p>
 
 <h4>
-<a id="what-i-could-have-done-better-2" class="anchor" href="#what-i-could-have-done-better-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I could have done better.</h4>
+<a id="what-i-could-have-done-better-4" class="anchor" href="#what-i-could-have-done-better-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What I could have done better.</h4>
 
-<p>I think there is a lot of room for improvement here. For example, the top and bottom navigation bars should probably have gotten their own template, and the container divs that centre the bulk of</p>
+<p>I believe there is a lot of room for improvement here. As far as the markup for the views go, the top and bottom navigation bars should probably have gotten their own template, and I could probably have used two distinct layout types - one for forms, one for the rest of the app. That would have reduced some of of the repetitive markup used to centre the elements on the page and would clean up the logic used for displaying flash messages.</p>
+
+<p>One thing that bugs me, that has a bit of a code smell to it, is the repetition of a couple of helper methods. In fact, each controller has the exact same <code>invalid_email?</code> helper method. </p>
+
+<div class="highlight highlight-source-ruby"><pre>helpers <span class="pl-k">do</span>
+  <span class="pl-k">def</span> <span class="pl-en">invalid_email?</span>(<span class="pl-smi">submitted_email</span>)
+    valid_email <span class="pl-k">=</span> <span class="pl-sr"><span class="pl-pds">/</span><span class="pl-cce">\A</span><span class="pl-pds">[<span class="pl-cce">\w</span>+<span class="pl-cce">\-</span>.]</span>+@<span class="pl-pds">[a-z<span class="pl-cce">\d\-</span>]</span>+<span class="pl-sr">(<span class="pl-cce">\.</span><span class="pl-pds">[a-z]</span>+)</span>*<span class="pl-cce">\.</span><span class="pl-pds">[a-z]</span>+<span class="pl-cce">\z</span><span class="pl-pds">/i</span></span>
+    submitted_email.match(valid_email).nil?
+  <span class="pl-k">end</span>
+<span class="pl-k">end</span></pre></div>
+
+<p>To really tighten this down I would need either a module or Helper class that I could <code>include</code> or reference. I know Sinatra includes a <code>helpers</code> block for each controller, but it would be nice (and maybe it does) if it included a location for some more universal helper methods.</p>
 
 <h3>
-<a id="the-frustration-of-css" class="anchor" href="#the-frustration-of-css" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Frustration of CSS.</h3>
+<a id="final-thoughts" class="anchor" href="#final-thoughts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Final Thoughts</h3>
+
+<p>All in all I'm happy with this app and the fact that I was able to build it 'from scratch'. It's hardly from scratch but compared to other things I've made, it seems like it is. My confidence level has increased, my security with manipulating data has grown, and I've also discovered things that I want to figure out down the road.</p>
+
+<p>This app is overly simple and doesn't solve any real problem, except perhaps, a student forgetting their super simple paper notebook. Still, I think there does remain plenty of room for expansion into something useful if time and effort were put into furthering this project.</p>
         </section>
 
         <footer>
