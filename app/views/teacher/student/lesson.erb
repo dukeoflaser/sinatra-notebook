@@ -1,28 +1,50 @@
-<a href="/teacher/<%= @user.id %>/student/<%= @student.id %>/lessons">All Lessons</a>
-<br>
-<h3><%= @lesson.name %></h3>
-<p><%= @lesson.date %></p>
-<h4>Notes</h4>
-<div>
-  <p><%= @lesson_notes_html %></p>
+<nav class="navbar navbar-inverse navbar-fixed-top navbar-embossed" role="navigation">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/">Notebook</a>
+  </div>
+  <span class="navbar-text navbar-right mrl mll">Signed in as <%= @user.name %></span>
+</nav>
+
+<div class="top-push">
+  <div class="row bottom-push">
+    <div class="col-sm-6 col-sm-offset-3">
+      
+      <h3><%= @lesson.name %></h3>
+      <hr>
+      <p><%= @lesson.date %></p>
+      <span>Status: </span>
+      <span class="label label-default"><%= @lesson.status %></span>
+      <h5>Notes:</h5>
+      <div>
+        <p><%= @lesson_notes_html %></p>
+      </div>
+      <h5>Goal:</h5>
+      <div>
+        <p><%= @lesson_goal_html %></p>
+      </div>
+      <hr>
+      
+      <form method="post" action="/teacher/student/lesson/<%= @lesson.id %>/status">
+        <input type="hidden" name="_method" value="patch">
+        <label class="checkbox" for="checkbox2">
+        Complete? <input type="checkbox" name="complete" value="true" id="checkbox2"<%= checked="checked" if @lesson.complete == true %> data-toggle="checkbox">
+        </label>
+        <input type="submit" class="btn btn-xs btn-primary" name="save_status" value="Save Status">
+      </form>  
+      <hr>
+      <form method="post" action="/teacher/student/lesson/<%= @lesson.id %>/delete">
+        <input type="hidden" name="_method" value="delete">
+        <a href="/teacher/student/lesson/<%= @lesson.id %>/edit" class="btn btn-lg btn-inverse">Edit</a>
+        <input type="submit" class="btn btn-lg btn-danger" name="delete" value="Delete">
+      </form>
+
+    </div>  
+  </div>
 </div>
-<h4>Goal</h4>
-<div>
-  <p><%= @lesson_goal_html %></p>
-</div>
-<h4>Status:</h4>
-<div>
-  <h4><%= @lesson.status %></h4>
-</div>
-<form method="post" action="/teacher/<%= @user.id %>/student/<%= @student.id %>/lesson/<%= @lesson.id %>/status">
-  <input type="hidden" name="_method" value="patch">
-  Complete? <input type="checkbox" name="complete" value="true" <%= "checked" if @lesson.complete == true %>>
-  <input type="submit" name="save_status" value="Save Status">
-</form>  
-<a href="/teacher/<%= @user.id %>/student/<%= @student.id %>/lesson/<%= @lesson.id %>/edit">Edit</a>
-<form method="post" action="/teacher/<%= @user.id %>/student/<%= @student.id %>/lesson/<%= @lesson.id %>/delete">
-  <input type="hidden" name="_method" value="delete">
-  <input type="submit" name="delete" value="Delete">
-</form>
-<br>
-<a href="/logout">Log Out</a>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom navbar-embossed" role="navigation">
+  <a href="/teacher/home" class="btn btn-success navbar-btn btn-xs mll" type="button">Home</a>
+  <a href="/logout" class="btn btn-inverse navbar-btn btn-xs mll" type="button">Logout</a>
+  <a href="/teacher/student/lessons" class="btn btn-info navbar-btn btn-xs mll" type="button">All Lessons</a>
+</nav>

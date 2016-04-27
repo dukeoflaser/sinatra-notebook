@@ -1,14 +1,31 @@
-<h3>Notebook</h3>
-<h3><%= flash[:user] %></h3>
-<h3><%= flash[:password] %></h3>
-<h3><%= flash[:unknown] %></h3>
-<form action="/login" method="post">
-  <input type="radio" name="user_type" value="teacher" />Teacher
-  <input type="radio" name="user_type" value="student" checked/>Student
-  <br>
-  <input type="email" name="email" placeholder="Email"/><br>
-  <input type="password" name="password" placeholder="Password"/><br>
-  <input type="submit" name="login" value="Login"/>
-</form>
-<br>
-<a href="/signup">Sign Up Instead</a>
+<h4>Notebook</h4>
+
+<div class="top-push">
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <% unless flash.empty? %>
+        <div class="alert alert-info">
+          <button class="close fui-cross" data-dismiss="alert"></button>
+          <h4>Houston, we have a problem...</h4>
+          <p><%= flash[:user] %></p>
+          <p><%= flash[:password] %></p>
+          <p><%= flash[:unknown] %></p>
+        </div>
+      <% end %>
+      <form action="/login" method="post">
+        <label class="radio col-xs-5">
+          <input type="radio" name="user_type" value="teacher" data-toggle="radio">
+          Teacher
+        </label>
+        <label class="radio col-xs-7">
+          <input type="radio" name="user_type" value="student" data-toggle="radio" checked>
+          Student
+        </label>
+        <input type="email" class="form-control input-lg mtl" name="email" placeholder="Email"/>
+        <input type="password" class="form-control input-lg mtl" name="password" placeholder="Password"/>
+        <input type="submit" class="btn btn-lg btn-primary mrm mtl" name="login" value="Login"/>
+        <a href="/signup" class="btn btn-lg btn-default mtl">Sign Up</a>
+      </form>
+    </div>
+  </div>
+</div>

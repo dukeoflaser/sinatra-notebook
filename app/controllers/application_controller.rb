@@ -1,4 +1,4 @@
- require './config/environment'
+require './config/environment'
 
 class ApplicationController < Sinatra::Base
   
@@ -52,8 +52,8 @@ class ApplicationController < Sinatra::Base
     
     if user.save
       session[:user_id] = user.id
-      redirect "teacher/#{user.id}/home" if user.is_a? Teacher
-      redirect "student/#{user.id}/lessons" if user.is_a? Student
+      redirect "teacher/home" if user.is_a? Teacher
+      redirect "student/lessons" if user.is_a? Student
     else  
       flash[:password] = "Please enter a valid password."
       redirect '/signup'
@@ -81,8 +81,13 @@ class ApplicationController < Sinatra::Base
       
       if user && user.authenticate(params["password"])
         session[:user_id] = user.id
-        redirect "/teacher/#{user.id}/home" if user.is_a? Teacher
-        redirect "/student/#{user.id}/lessons" if user.is_a? Student
+        if user.is_a? Teacher
+          session[:user_type] = 'teacher'
+          redirect "/teacher/home"
+        elsif user.is_a? Student
+          session[:user_type] = 'student'
+          redirect "/student/lessons"
+        end
       else
         flash[:password] = "Incorrect Password"
         redirect '/login'
@@ -94,6 +99,11 @@ class ApplicationController < Sinatra::Base
   get '/logout' do
     session.clear
     redirect '/'
+  end
+  
+  not_found do
+    status 404
+    erb :oops
   end
   
   helpers do

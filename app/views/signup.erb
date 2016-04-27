@@ -1,23 +1,37 @@
-<h3>Sign up as:</h3>
-<h3><%= flash[:name] %></h3>
-<h3><%= flash[:user] %></h3>
-<h3><%= flash[:email] %></h3>
-<h3><%= flash[:pw_mismatch] %></h3>
-<h3><%= flash[:password] %></h3>
+<h4>Notebook</h4>
 
-<form method="post" action="/signup">
-  <input type="radio" name="user_type" value="teacher" />Teacher
-  <input type="radio" name="user_type" value="student" checked/>Student
-  <br>
-  <input type="text" name="name" placeholder="Name">
-  <br>
-  <input type="email" name="email" placeholder="Email">
-  <br>
-  <input type="password" name="password" placeholder="Password">
-  <br>
-  <input type="password" name="conf_password" placeholder="Confirm Password">
-  <br>
-  <input type="submit" name="signup" value="Sign Up">
-</form>
-<br>
-<a href="/login">Login Instead</a>
+<div class="top-push">
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      
+      <% unless flash.empty? %>
+        <div class="alert alert-info">
+          <button class="close fui-cross" data-dismiss="alert"></button>
+          <h4>Houston, we have a problem...</h4>
+          <p><%= flash[:name] %></p>
+          <p><%= flash[:user] %></p>
+          <p><%= flash[:email] %></p>
+          <p><%= flash[:pw_mismatch] %></p>
+          <p><%= flash[:password] %></p>
+        </div>
+      <% end %>
+      
+      <form method="post" action="/signup">
+        <label class="radio col-xs-5">
+          <input type="radio" name="user_type" value="teacher" data-toggle="radio">
+          Teacher
+        </label>
+        <label class="radio col-xs-7">
+          <input type="radio" name="user_type" value="student" data-toggle="radio" checked>
+          Student
+        </label>
+        <input type="text" class="form-control input-lg mtl" name="name" placeholder="Name">
+        <input type="email" class="form-control input-lg mtl" name="email" placeholder="Email">
+        <input type="password" class="form-control input-lg mtl" name="password" placeholder="Password">
+        <input type="password" class="form-control input-lg mtl" class="form-control input-lg mtl" name="conf_password" placeholder="Confirm Password">
+        <input type="submit" class="btn btn-lg btn-primary btn-wide mrm mtl" name="signup" value="Sign Up">
+        <a href="/login" class="btn btn-lg btn-default btn-wide mtl">Login</a>
+      </form>
+    </div>
+  </div>
+</div>

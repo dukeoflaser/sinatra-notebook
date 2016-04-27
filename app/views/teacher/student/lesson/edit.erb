@@ -1,12 +1,19 @@
-<h2>Edit Lesson</h2>
-<form method="post" action="/teacher/<%= @user.id %>/student/<%= @student.id %>/lesson/<%= @lesson.id %>/edit" id="edit-lesson">
-  <input type="hidden" name="_method" value="patch">
-  <input type="text" name="name" value="<%= @lesson.name %>">
-  <textarea name="notes" rows="10" cols="50" form="edit-lesson"><%= @lesson.notes %></textarea> 
-  <textarea name="goal" rows="5" cols="50" form="edit-lesson"><%= @lesson.goal %></textarea>
-  <br>
-  <input type="submit" name="update" value="Save">
-</form>
-<br>
-<a href="/teacher/<%= @user.id %>/student/<%= @student.id %>/lessons">Cancel</a><br>
-<a href="/logout">Log Out</a>
+<h4>Notebook</h4>
+
+<div class="top-push">
+  <div class="row bottom-push">
+    <div class="col-sm-4 col-sm-offset-4">
+      
+      <form method="post" action="/teacher/student/lesson/<%= @lesson.id %>/edit" id="edit-lesson">
+        <input type="hidden" name="_method" value="patch">
+        <input type="text" class="form-control" name="name" value="<%= @lesson.name %>">
+        <textarea class="form-control mtl" name="notes" rows="10" cols="50" form="edit-lesson"><%= @lesson.notes %></textarea> 
+        <textarea class="form-control mtl" name="goal" rows="5" cols="50" form="edit-lesson"><%= @lesson.goal %></textarea>
+        <br>
+        <input type="submit" class="btn btn-lg btn-primary" name="update" value="Save">
+        <a href="/teacher/student/lessons" class="btn btn-lg btn-default">Cancel</a><br>
+      </form>
+
+    </div>
+  </div>
+</div>

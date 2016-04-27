@@ -1,29 +1,45 @@
-<h1><%= @student.name%>'s Lessons</h1>
-<a href="/teacher/<%= @user.id %>/home">Home</a>
-<%= flash[:deleted] %>
-<br>
-<a href="/teacher/<%= @user.id %>/student/<%= @student.id %>/lesson/new">New Lesson</a>
-<hr>
-<% if @student.lessons.empty? %>
-  <h3>No Lessons</h3>
-  <hr>
-<% else %> 
-  <% @student.lessons.reverse.each do |lesson| %>
-    <a href="/teacher/<%= @user.id %>/student/<%= @student.id %>/lesson/<%= lesson.id %>">
-      <div>
-        <h4><%= lesson.date %></h4>
-        <h3><%= lesson.name %></h3>
-        <h5>Status: <%= lesson.status %></h5>
-      </div>
-    </a>
-    <hr>
-  <% end %>
-<% end %>
+<nav class="navbar navbar-inverse navbar-fixed-top navbar-embossed" role="navigation">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/">Notebook</a>
+  </div>
+  <span class="navbar-text navbar-right mrl mll">Signed in as <%= @user.name %></span>
+</nav>
 
+ 
 
+<div class="top-push">
+  <div class="row bottom-push">
+    <div class="col-sm-6 col-sm-offset-3">
+      <% unless flash.empty? %>
+        <div class="alert alert-info">
+          <button class="close fui-cross" data-dismiss="alert"></button>
+          <h4>Gone, but not forgotten...</h4>
+          <%= flash[:deleted] %>
+        </div>
+      <% end %>  
+      <a href="/teacher/student/lesson/new" class="btn btn-primary navbar-btn btn-xs">New Lesson</a>
+      <hr>
+      <% if @student.lessons.empty? %>
+        <h1 class="text-center">No Lessons</h1>
+      <% else %> 
+        <% @student.lessons.reverse.each do |lesson| %>
+          <a href="/teacher/student/lesson/<%= lesson.id %>">
+            <div>
+              <p><%= lesson.date %></p>
+              <h4><%= lesson.name %></h4>
+                <span>Status: </span>
+                <span class="label label-default"><%= lesson.status %></span>
+            </div>
+          </a>
+          <hr>
+        <% end %>
+      <% end %>
 
+    </div>
+  </div>
+</div>
 
-
-
-<br>
-<a href="/logout">Log Out</a>
+<nav class="navbar navbar-default navbar-fixed-bottom navbar-embossed" role="navigation">
+  <a href="/teacher/home" class="btn btn-success navbar-btn btn-xs mll">Home</a>
+  <a href="/logout" class="btn btn-inverse navbar-btn btn-xs mll" type="button">Logout</a>
+</nav>

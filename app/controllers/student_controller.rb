@@ -1,5 +1,3 @@
-require 'pry'
-
 class StudentController < Sinatra::Base
   
   configure do
@@ -10,31 +8,47 @@ class StudentController < Sinatra::Base
     register Sinatra::Flash
   end
   
-  get '/student/:id/lessons' do
-    @user = Student.find_by_id(session[:user_id])
-    erb :"/student/lessons"
+  get '/student/lessons' do
+    if valid_student
+      @user = Student.find_by_id(session[:user_id])
+      erb :"/student/lessons"
+    else
+      redirect '/login'
+    end
   end
   
-  get '/student/:s_id/edit' do
-    @user = Student.find_by_id(session[:user_id])
-    erb :'/student-edit'
+  get '/student/lesson/:l_id' do
+    if valid_student
+      @user = Student.find_by_id(session[:user_id])
+      @lesson = Lesson.find_by_id(params[:l_id])
+      @lesson_notes_html = @lesson.notes.split("\n").join("<br>")
+      @lesson_goal_html = @lesson.goal.split("\n").join("<br>")    
+      erb :'/student/lesson'
+    else
+      redirect '/login'
+    end      
   end
   
-  get '/student/:s_id/lesson/:l_id' do
-    @user = Student.find_by_id(session[:user_id])
-    @lesson = Lesson.find_by_id(params[:l_id])
-    erb :'/student/lesson'
+  
+  get '/student/edit' do
+    if valid_student
+      @user = Student.find_by_id(session[:user_id])
+      erb :'/student-edit'
+    else
+      redirect '/login'
+    end      
   end
   
-  patch '/student/:id/edit' do
+
+  patch '/student/edit' do
     if params["name"].empty?
       flash[:name] = "Please enter your name."
-      redirect '/student/:id/edit'
+      redirect '/student/edit'
     end
     
     if invalid_email?(params["email"])
       flash[:email] = "#{params["email"]} is not a valid email address."
-      redirect '/student/:id/edit'
+      redirect '/student/edit'
     end
     
     @user = Student.all.find_by_id(session[:user_id])
@@ -42,7 +56,7 @@ class StudentController < Sinatra::Base
     @user.email = params["email"]
     @user.save
     
-    redirect "/student/#{@user.id}/lessons"
+    redirect "/student/lessons"
   end
   
   
@@ -51,6 +65,10 @@ class StudentController < Sinatra::Base
       #michael hartl's regex
       valid_email = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
       submitted_email.match(valid_email).nil?
+    end
+    
+    def valid_student
+      session[:user_id].nil? || session[:user_type] != 'student' ? false : true
     end
   end
   

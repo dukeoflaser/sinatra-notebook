@@ -11,14 +11,14 @@
           <p><%= flash[:name] %></p>
           <p><%= flash[:email] %></p>
         </div>
-      <% end %>
+      <% end %>      
       
-      <form method="post" action="/student/edit">
+      <form method="post" action="/teacher/edit">
         <input type="hidden" name="_method" value="patch">
         <input type="text" class="form-control input-lg mtl" name="name" value="<%= @user.name %>">
         <input type="email" class="form-control input-lg mtl" name="email" value="<%= @user.email %>">
         <input type="submit" class="btn btn-lg btn-primary btn-wide mrm mtl" name="edit" value="Save">
-        <a href="/student/lessons" class="btn btn-lg btn-default btn-wide mtl">Cancel</a>
+        <a href="/teacher/home" class="btn btn-lg btn-default btn-wide mtl">Cancel</a>
       </form>
       
     </div>

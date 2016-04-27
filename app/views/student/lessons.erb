@@ -1,20 +1,36 @@
-<h1>Your Lessons</h1>
-<%= @user.name %>
-<hr>
-<% if @user.lessons.empty? %>
-  <h3>No Lessons</h3>
-<% else %>  
-  <% @user.lessons.reverse.each do |lesson| %>
-  <a href="/student/<%= @user.id %>/lesson/<%= lesson.id %>">
-    <div>
-      <h4><%= lesson.date %></h4>
-      <h3><%= lesson.name %></h3>
-      <h5>Status: <%= lesson.status %></h5>
+<nav class="navbar navbar-inverse navbar-fixed-top navbar-embossed" role="navigation">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/">Notebook</a>
+  </div>
+  <span class="navbar-text navbar-right mrl mll">Signed in as <%= @user.name %></span>
+</nav>
+
+<div class="top-push">
+  <div class="row bottom-push">
+    <div class="col-sm-6 col-sm-offset-3">
+      <% if @user.lessons.empty? %>
+        <h1 class="top-push text-center">No Lessons</h1>
+      <% else %>  
+        <hr>
+        <% @user.lessons.reverse.each do |lesson| %>
+          <a href="/student/lesson/<%= lesson.id %>">
+            <div>
+              <p><%= lesson.date %></p>
+              <h3><%= lesson.name %></h3>
+              <h6>
+                <span>Status: </span>
+                <span class="label label-default"><%= lesson.status %></span>
+              </h6>
+            </div>
+          </a>
+          <hr>
+        <% end %>
+      <% end %> 
     </div>
-  </a>
-  <% end %>
-<% end %>  
-<hr>
-<br>
-<a href="/logout">Log Out</a>
-<a href="/student/<%= @user.id %>/edit">Edit Account</a>
+  </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom navbar-embossed" role="navigation">
+  <a href="/logout" class="btn btn-primary navbar-btn btn-xs mll" type="button">Logout</a>
+  <a href="/student/edit" class="btn btn-inverse navbar-btn btn-xs mll" type="button">Edit User</a>
+</nav>

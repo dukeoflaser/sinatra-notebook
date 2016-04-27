@@ -1,55 +1,78 @@
-<h2>Notebook</h2>
-<h5><%= @user.name %></h5>
-<%= flash[:removed] %>
-<hr>
-<h4>Take a lost student under your wing.</h4>
-<% if Student.has_no_teacher.empty? %>
+<nav class="navbar navbar-inverse navbar-fixed-top navbar-embossed" role="navigation">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/">Notebook</a>
+  </div>
+  <span class="navbar-text navbar-right mrl mll">Signed in as <%= @user.name %></span>
+</nav>
 
-  <form>
-    <select>
-      <option disabled>No Lost Students</option>
-      <input type="submit" value="Nurture" disabled>
-    </select>
-  </form> 
+<div class="top-push">
+  <div class="row bottom-push">
+    <div class="col-sm-6 col-sm-offset-3">
+      
+    <% unless flash.empty? %>
+      <div class="alert alert-info">
+        <button class="close fui-cross" data-dismiss="alert"></button>
+        <h4>Gone, but not forgotten...</h4>
+        <p><%= flash[:removed] %></p>
+      </div>
+    <% end %>      
 
-<% else %>
-
-  <form method="post" action="/teacher/<%= @user.id %>/select">
-    <select name="student_id">
-      <% Student.has_no_teacher.each do |student| %>
-        <option value="<%= student.id %>"><%= student.name %></option>
+      <h4>Take a lost student under your wing.</h4>
+      <% if Student.has_no_teacher.empty? %>
+      
+        <form>
+          <select class="form-control select select-default mbl" data-toggle="select">
+            <option disabled>No Lost Students</option>
+          </select>
+          <br><input type="submit" class="btn btn-lg btn-primary mrm mtl" value="Nurture" disabled>
+        </form> 
+      
+      <% else %>
+      
+        <form method="post" action="/teacher/select">
+          <select class="form-control select select-primary mbl" data-toggle="select" name="student_id">
+            <% Student.has_no_teacher.each do |student| %>
+              <option value="<%= student.id %>"><%= student.name %></option>
+            <% end %>
+          </select>
+          <br><input type="submit" class="btn btn-lg btn-primary mrm mtl" value="Nurture">
+        </form>
+      
       <% end %>
-    </select>
-    <input type="submit" value="Nurture">
-  </form>
-
-<% end %>
-<h4>Select a current student.</h4>
-<% if @user.students.empty? %>
-
-  <form>
-    <select>
-      <option disabled>No Students</option>  
-    </select>
-    <br>
-    <input type="submit" value="Select" disabled>
-    <input type="submit" value="Remove" disabled>
-  </form>
-  
-<% else %>
-
-  <form method="post" action="/teacher/<%= @user.id %>/select">
-    <select name="student_id">
-      <% @user.students.each do |student| %>
-        <option value="<%= student.id %>"><%= student.name %></option>
+      <br>
+      <br>
+      <h4>Select a current student.</h4>
+      <% if @user.students.empty? %>
+      
+        <form>
+          <select class="form-control select select-default mbl" data-toggle="select">
+            <option disabled>No Students</option>  
+          </select>
+          <br>
+          <input type="submit" class="btn btn-lg btn-primary mrm mtl" value="Select" disabled>
+          <input type="submit" class="btn btn-lg btn-default mrm mtl" value="Remove" disabled>
+        </form>
+        
+      <% else %>
+      
+        <form method="post" action="/teacher/select">
+          <select class="form-control select select-primary mbl" data-toggle="select" name="student_id">
+            <% @user.students.each do |student| %>
+              <option value="<%= student.id %>"><%= student.name %></option>
+            <% end %>
+          </select>
+          <br>
+          <input type="submit" class="btn btn-lg btn-primary mrm mtl" name="select" value="Select">
+          <input type="submit" class="btn btn-lg btn-default mrm mtl" name="remove" value="Remove">
+        </form>
+        
       <% end %>
-    </select>
-    <br>
-    <input type="submit" name="select" value="Select">
-    <input type="submit" name="remove" value="Remove">
-  </form>
-  
-<% end %>
-<hr>
-<a href="/logout">Log Out</a>
-<a href="/teacher/<%= @user.id %>/edit">Edit Account</a>
+
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom navbar-embossed" role="navigation">
+  <a href="/logout" class="btn btn-primary navbar-btn btn-xs mll" type="button">Logout</a>
+  <a href="/teacher/edit" class="btn btn-inverse navbar-btn btn-xs mll" type="button">Edit User</a>
+</nav>

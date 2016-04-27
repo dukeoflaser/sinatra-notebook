@@ -9,48 +9,60 @@ class TeacherController < Sinatra::Base
   end
   
   
-  get '/teacher/:id/home' do
-    @user = Teacher.find_by_id(session[:user_id])
-    session[:student_id] = nil
-    erb :'/teacher/home'
+  get '/teacher/home' do
+    if valid_teacher
+      @user = Teacher.find_by_id(session[:user_id])
+      session[:student_id] = nil
+      erb :'/teacher/home'
+    else
+      redirect '/login'
+    end
   end
   
   
-  post '/teacher/:id/select' do
-    user = Teacher.find_by_id(session[:user_id])
-    session[:student_id] = params["student_id"].to_i
-    student = Student.find_by_id(session[:student_id])
-    
-    if params.has_key?("remove")
-      user.students.delete(student)
+  post '/teacher/select' do
+    if valid_teacher
+      user = Teacher.find_by_id(session[:user_id])
+      session[:student_id] = params["student_id"].to_i
+      student = Student.find_by_id(session[:student_id])
       
-      flash[:removed] = "Student has been removed."
-      redirect "/teacher/#{user.id}/home"
+      if params.has_key?("remove")
+        user.students.delete(student)
+        
+        flash[:removed] = "Student has been removed."
+        redirect "/teacher/home"
+      end
+      
+      unless user.students.include? student
+        user.students << student
+      end
+      
+      redirect "/teacher/student/lessons"
+    else
+      redirect '/login'
     end
-    
-    unless user.students.include? student
-      user.students << student
-    end
-    
-    redirect "/teacher/#{user.id}/student/#{student.id}/lessons"
   end
   
   
-  get '/teacher/:id/edit' do
-  @user = Teacher.find_by_id(session[:user_id])
-    erb :'/user-edit'
+  get '/teacher/edit' do
+    if valid_teacher
+      @user = Teacher.find_by_id(session[:user_id])
+      erb :'/teacher-edit'
+    else
+      redirect '/login'
+    end    
   end
   
   
-  patch '/teacher/:id/edit' do
+  patch '/teacher/edit' do
     if params["name"].empty?
       flash[:name] = "Please enter your name."
-      redirect '/teacher/:id/edit'
+      redirect '/teacher/edit'
     end
     
     if invalid_email?(params["email"])
       flash[:email] = "#{params["email"]} is not a valid email address."
-      redirect '/teacher/:id/edit'
+      redirect '/teacher/edit'
     end
     
     @user = Teacher.all.find_by_id(session[:user_id])
@@ -58,21 +70,29 @@ class TeacherController < Sinatra::Base
     @user.email = params["email"]
     @user.save
     
-    redirect "/teacher/#{@user.id}/home"
+    redirect "/teacher/home"
   end
   
   
-  get '/teacher/:t_id/student/:s_id/lessons' do
-    @user = Teacher.find_by_id(session[:user_id])
-    @student = Student.find_by_id(session[:student_id])
-    erb :'/teacher/student/lessons'
+  get '/teacher/student/lessons' do
+    if valid_teacher
+      @user = Teacher.find_by_id(session[:user_id])
+      @student = Student.find_by_id(session[:student_id])
+      erb :'/teacher/student/lessons'
+    else
+      redirect '/login'
+    end    
   end
   
   
-  get '/teacher/:t_id/student/:s_id/lesson/new' do
-    @user = Teacher.find_by_id(session[:user_id])
-    @student = Student.find_by_id(session[:student_id])
-    erb :'/teacher/student/lesson/new'
+  get '/teacher/student/lesson/new' do
+    if valid_teacher
+      @user = Teacher.find_by_id(session[:user_id])
+      @student = Student.find_by_id(session[:student_id])
+      erb :'/teacher/student/lesson/new'
+    else
+      redirect '/login'
+    end    
   end
   
   
@@ -88,63 +108,75 @@ class TeacherController < Sinatra::Base
     @lesson.save
     @student.lessons << @lesson
     
-    redirect "/teacher/#{@user.id}/student/#{@student.id}/lesson/#{@lesson.id}"
+    redirect "/teacher/student/lesson/#{@lesson.id}"
   end
   
   
-  get '/teacher/:t_id/student/:s_id/lesson/:l_id' do
-    @user = Teacher.find_by_id(session[:user_id])
-    @student = Student.find_by_id(session[:student_id])
-    @lesson = Lesson.find_by_id(params[:l_id])
-    @lesson_notes_html = @lesson.notes.split("\n").join("<br>")
-    @lesson_goal_html = @lesson.goal.split("\n").join("<br>")
-    erb :'/teacher/student/lesson'
+  get '/teacher/student/lesson/:l_id' do
+    if valid_teacher
+      @user = Teacher.find_by_id(session[:user_id])
+      @student = Student.find_by_id(session[:student_id])
+      @lesson = Lesson.find_by_id(params[:l_id])
+      @lesson_notes_html = @lesson.notes.split("\n").join("<br>")
+      @lesson_goal_html = @lesson.goal.split("\n").join("<br>")
+      erb :'/teacher/student/lesson'
+    else
+      redirect '/login'
+    end    
   end
   
   
-  get '/teacher/:t_id/student/:s_id/lesson/:l_id/edit' do
-    @user = Teacher.find_by_id(session[:user_id])
-    @student = Student.find_by_id(session[:student_id])
-    @lesson = Lesson.find_by_id(params[:l_id])
-    erb :"/teacher/student/lesson/edit"
+  get '/teacher/student/lesson/:l_id/edit' do
+    if valid_teacher
+      @user = Teacher.find_by_id(session[:user_id])
+      @student = Student.find_by_id(session[:student_id])
+      @lesson = Lesson.find_by_id(params[:l_id])
+      erb :"/teacher/student/lesson/edit"
+    else
+      redirect '/login'
+    end    
   end
   
   
-  patch '/teacher/:t_id/student/:s_id/lesson/:l_id/edit' do
+  patch '/teacher/student/lesson/:l_id/edit' do
+    if valid_teacher
+      @user = Teacher.find_by_id(session[:user_id])
+      @student = Student.find_by_id(session[:student_id])    
+      @lesson = Lesson.find_by_id(params[:l_id])
+      @lesson.name = params["name"]
+      @lesson.notes = params["notes"]
+      @lesson.goal = params["goal"]
+      complete = params["complete"]
+      complete == "true" ? @lesson.complete = true : @lesson.complete = false
+      @lesson.save
+      
+      redirect "/teacher/student/lesson/#{@lesson.id}"
+    else
+      redirect '/login'
+    end    
+  end
+  
+  
+  patch '/teacher/student/lesson/:l_id/status' do
     @user = Teacher.find_by_id(session[:user_id])
     @student = Student.find_by_id(session[:student_id])    
     @lesson = Lesson.find_by_id(params[:l_id])
-    @lesson.name = params["name"]
-    @lesson.notes = params["notes"]
-    @lesson.goal = params["goal"]
     complete = params["complete"]
     complete == "true" ? @lesson.complete = true : @lesson.complete = false
     @lesson.save
     
-    redirect "/teacher/#{@user.id}/student/#{@student.id}/lesson/#{@lesson.id}"
+    redirect "/teacher/student/lesson/#{@lesson.id}"
   end
   
   
-  patch '/teacher/:t_id/student/:s_id/lesson/:l_id/status' do
-    @user = Teacher.find_by_id(session[:user_id])
-    @student = Student.find_by_id(session[:student_id])    
-    @lesson = Lesson.find_by_id(params[:l_id])
-    complete = params["complete"]
-    complete == "true" ? @lesson.complete = true : @lesson.complete = false
-    @lesson.save
-    
-    redirect "/teacher/#{@user.id}/student/#{@student.id}/lesson/#{@lesson.id}"
-  end
-  
-  
-  delete '/teacher/:t_id/student/:s_id/lesson/:l_id/delete' do
+  delete '/teacher/student/lesson/:l_id/delete' do
     @user = Teacher.find_by_id(session[:user_id])
     @student = Student.find_by_id(session[:student_id])
     @lesson = Lesson.find_by_id(params[:l_id])
     @lesson.delete
     flash[:deleted] = "A lesson has been deleted."
     
-    redirect "/teacher/#{@user.id}/student/#{@student.id}/lessons"
+    redirect "/teacher/student/lessons"
   end
   
   
@@ -153,6 +185,10 @@ class TeacherController < Sinatra::Base
       #michael hartl's regex
       valid_email = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
       submitted_email.match(valid_email).nil?
+    end
+    
+    def valid_teacher
+      session[:user_id].nil? || session[:user_type] != 'teacher' ? false : true
     end
   end
   
