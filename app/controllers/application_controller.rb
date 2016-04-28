@@ -42,8 +42,10 @@ class ApplicationController < Sinatra::Base
     
     if params["user_type"] == "teacher"
       user = Teacher.new(name: params["name"])
+      session[:user_type] = 'teacher'
     else
       user = Student.new(name: params["name"])
+      session[:user_type] = 'student'
     end
     
     user.email = params["email"]
