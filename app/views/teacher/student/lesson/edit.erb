@@ -6,9 +6,9 @@
       
       <form method="post" action="/teacher/student/lesson/<%= @lesson.id %>/edit" id="edit-lesson">
         <input type="hidden" name="_method" value="patch">
-        <input type="text" class="form-control" name="name" value="<%= @lesson.name %>">
-        <textarea class="form-control mtl" name="notes" rows="10" cols="50" form="edit-lesson"><%= @lesson.notes %></textarea> 
-        <textarea class="form-control mtl" name="goal" rows="5" cols="50" form="edit-lesson"><%= @lesson.goal %></textarea>
+        <input type="text" class="form-control" name="name" value="<%= @lesson.name %>" required>
+        <textarea class="form-control mtl" name="notes" rows="10" cols="50" form="edit-lesson" required><%= @lesson.notes %></textarea> 
+        <textarea class="form-control mtl" name="goal" rows="5" cols="50" form="edit-lesson" required><%= @lesson.goal %></textarea>
         <br>
         <input type="submit" class="btn btn-lg btn-primary" name="update" value="Save">
         <a href="/teacher/student/lessons" class="btn btn-lg btn-default">Cancel</a><br>

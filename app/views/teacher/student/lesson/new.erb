@@ -5,12 +5,12 @@
     <div class="col-sm-4 col-sm-offset-4">
 
       <form method="post" action="/lesson/new" id="new-lesson">
-        <input type="text" class="form-control" name="name" placeholder="Lesson Name">
+        <input type="text" class="form-control" name="name" placeholder="Lesson Name" required>
         <% time = Time.new %>
         <input type="hidden" name="date" value="<%= "#{time.month}/#{time.day}/#{time.year}" %>">
         <input type="hidden" name="student_id" value="<%= @student.id %>">
-        <textarea class="form-control mtl" name="notes" rows="10" cols="50" form="new-lesson" placeholder="Notes"></textarea> 
-        <textarea class="form-control mtl" name="goal" rows="5" cols="50" form="new-lesson" placeholder="Goal"></textarea>
+        <textarea class="form-control mtl" name="notes" rows="10" cols="50" form="new-lesson" placeholder="Notes" required></textarea> 
+        <textarea class="form-control mtl" name="goal" rows="5" cols="50" form="new-lesson" placeholder="Goal" required></textarea>
         <br>
         <input type="submit" class="btn btn-lg btn-primary" name="create" value="Create">
         <a href="/teacher/student/lessons" class="btn btn-lg btn-default">Cancel</a><br>

@@ -15,9 +15,9 @@
       
       <form method="post" action="/student/edit">
         <input type="hidden" name="_method" value="patch">
-        <input type="text" class="form-control input-lg mtl" name="name" value="<%= @user.name %>">
-        <input type="email" class="form-control input-lg mtl" name="email" value="<%= @user.email %>">
-        <input type="submit" class="btn btn-lg btn-primary btn-wide mrm mtl" name="edit" value="Save">
+        <input type="text" class="form-control input-lg mtl" name="name" value="<%= @user.name %>"> required
+        <input type="email" class="form-control input-lg mtl" name="email" value="<%= @user.email %>" required>
+        <input type="submit" class="btn btn-lg btn-primary btn-wide mrm mtl" name="edit" value="Save" required>
         <a href="/student/lessons" class="btn btn-lg btn-default btn-wide mtl">Cancel</a>
       </form>
       
